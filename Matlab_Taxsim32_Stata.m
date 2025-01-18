@@ -12,7 +12,7 @@
 %% Structure
 
 % 1. Instructions
-% 2. Function Definition: taxsim32_stata
+% 2. Function Definition: taxsim32_stata.m
 % 3. Example
 
 
@@ -34,6 +34,7 @@ function [tbl_out] = taxsim32_stata(dir, tbl_in) % (version: 1.0.0)
 
 writetable(tbl_in, strcat(dir,'taxsim32_input.csv'));
 
+% Generate temporary Stata do file: loads data, calls taxsim32.ado, saves results
 tmp_do_file = ["clear all", strcat("cd ", dir), strcat("import delimited using ", dir, "taxsim32_input.csv"), "taxsim32, full", strcat("use ", dir, "taxsim_out.dta, clear"), strcat("export delimited ", dir, "taxsim32_output.csv, replace")];
 fileID = fopen(strcat(dir,"tmp_do_file.do"),'w' );
 for i = 1:length(tmp_do_file)
